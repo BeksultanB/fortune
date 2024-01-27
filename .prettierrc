@@ -1,0 +1,19 @@
+{
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "avoid",
+    "tabWidth": 4,
+    "importOrder": [
+        "^react(.*)$",
+        "^/(.*)$",
+        "^(views|containers|components|pages|UI|shared|entities|widgets)/(.*)$",
+        "^(helpers|utils|router|store)/(.*)$",
+        "^models/(.*)$",
+        "^hooks/(.*)$",
+        "^assets/(.*)$",
+        "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
+}

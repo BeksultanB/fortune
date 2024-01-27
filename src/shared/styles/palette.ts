@@ -1,0 +1,47 @@
+export const palette = {
+    $siren: 'rgba(0, 146, 161, 0.7)',
+    $siren_light: '#F3FAFB',
+
+    $black: '#18191c',
+    $black_2: '#2f3137',
+
+    $gray_blue: '#7893b0',
+    $gray_blue_3: '#8b96b1',
+    $gray_blue_2: '#758795',
+
+    $white: '#ffff',
+
+    $gray: '#474a53',
+    $gray_2: '#5e626e',
+    $gray_4: '#babcc4',
+    $gray_3: '#838795',
+    $gray_5: '#D6D7DC',
+
+    $light_gray_3: '#f7f7f8',
+    $light_gray_2: '#f1f2f3',
+    $light_grey: '#E3E4E8',
+
+    $blue: '#1890ff',
+    $dark_blue: '#244f6d',
+
+    $green: '#389e0d',
+
+    $yellow: '#fdd400',
+
+    $orange: '#faad14',
+    $orange_2: '#F1880C',
+
+    $red: '#f5222d',
+
+    $purple: '#722ED1',
+
+    $punk: '#EB2F96',
+
+    $light_blue: '#e6f5f6',
+    $light_blue_4: '#d4e3ff',
+    $light_blue_3: '#b5c7d9',
+    $light_blue_2: '#ecf0f0',
+
+    $transparent: 'transparent',
+
+}

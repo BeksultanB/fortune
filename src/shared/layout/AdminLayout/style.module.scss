@@ -1,0 +1,24 @@
+.wrapper {
+    background: $light_gray_3;
+
+    min-height: 100vh;
+
+    min-width: 1000px;
+
+    overflow: scroll;
+
+    .layout {
+        padding-left: 60px;
+    }
+
+    .spinWrapper {
+        height: 100vh !important;
+        max-height: 100vh !important;
+
+        overflow: hidden;
+    }
+
+    .content {
+        padding: 20px;
+    }
+}
