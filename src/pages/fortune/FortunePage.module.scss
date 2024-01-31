@@ -5,20 +5,20 @@
         overflow: visible;
     }
 
-    .swiper-wrapper {
+    div.swiper-wrapper {
         align-items: center;
-    }
-
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: rgb(218, 112, 112);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 92%;
-        padding: 32px 24px;
-        transition: transform 2s linear;
+        transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        div.swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: rgb(218, 112, 112);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 92%;
+            padding: 32px 24px;
+            transition: transform 2s linear;
+        }
     }
 
     .swiper-slide img {
