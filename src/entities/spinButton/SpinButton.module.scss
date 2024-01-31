@@ -9,4 +9,10 @@
     font-style: normal;
     font-weight: 700;
     line-height: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+        background: #0b6128;
+        color: rgb(177, 177, 177);
+    }
 }

@@ -1,9 +1,7 @@
 import { RouterConstants } from 'shared/constants/routerConstants'
 
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { Auth, MainPage } from 'pages'
-import React from 'react'
-import ContentLoader from 'shared/ui/ContentLoader'
+import { Auth, Main } from 'pages'
 
 export default function Routing() {
     return (
@@ -12,7 +10,7 @@ export default function Routing() {
                 <Route
                     path={`${RouterConstants.MAIN}/*`}
                     element={
-                        <MainPage />
+                        <Main />
                     }
                 />
                 <Route

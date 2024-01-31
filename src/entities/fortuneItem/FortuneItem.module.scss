@@ -1,0 +1,25 @@
+.fortuneItemWrapped {
+    display: flex;
+    gap: 32px;
+    flex: 1 1 180px;
+    border-radius: 36px;
+}
+.fortuneItem {
+    display: flex;
+    gap: 32px;
+    border-radius: 36px;
+    align-items: center;
+}
+.fortuneIcon {
+}
+.fortuneContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #fff;
+    font-style: normal;
+    font-feature-settings:
+        'clig' off,
+        'liga' off;
+    gap: 5px;
+}

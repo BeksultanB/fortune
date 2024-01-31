@@ -1,16 +1,19 @@
-import { Route, Routes } from 'react-router-dom'
-import Main from './Main'
-import Fortune from 'widgets/fortune'
+import { Navigate, Route, Routes, useResolvedPath } from 'react-router-dom'
+import MainPage from './MainPage'
+import FortunePage from 'pages/fortune';
 
 
-function MainPage() {
+function Main() {
+    const { pathname } = useResolvedPath("");
+
     return (
         <Routes>
-            <Route element={<Main />}>
-                <Route path={`/fortune`} element={<Fortune />} />
+            <Route element={<MainPage />}>
+                <Route path={`/fortune`} element={<FortunePage />} />
+                <Route path={`*`} element={<Navigate to={`${pathname}/fortune`} />} />
             </Route>
         </Routes>
     )
 }
 
-export default MainPage
+export default Main

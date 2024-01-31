@@ -1,0 +1,26 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 53%;
+    max-width: 732px;
+    gap: 70px;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.subtitle {
+    color: #fff;
+    text-align: center;
+    font-size: 94px;
+}
+.text {
+    color: #fff;
+    text-align: center;
+    font-size: 84px;
+}
+.prize {
+    font-size: 18px;
+    padding: 32px 24px;
+}

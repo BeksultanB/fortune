@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 100%;
+    gap: 30px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 10px;
+        background-color: #f9f9fd;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #d1d1d1;
+        border-radius: 10px;
+        border: 2px solid #f9f9fd;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #a8a8a8;
+    }
+}
+.header {
+    display: flex;
+    flex-direction: column;
+}
+.subtitle {
+    font-size: 44px;
+}
+.text {
+    font-size: 34px;
+}
+.prizes {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
+}
+.prize {
+    padding: 22px 24px;
+    :global {
+        .subtitle {
+            font-size: 32px;
+            color: #15132b;
+        }
+        .text {
+            font-size: 22px;
+            color: #716f8a;
+        }
+        .fortuneIcon {
+            width: 78px;
+            height: 78px;
+        }
+    }
+}

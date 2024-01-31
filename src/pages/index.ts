@@ -1,4 +1,4 @@
 import Auth from './auth'
-import MainPage from './main'
+import Main from './main'
 
-export { MainPage, Auth }
+export { Main, Auth }
