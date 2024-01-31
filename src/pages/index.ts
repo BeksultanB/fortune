@@ -1,6 +1,4 @@
-import { lazy } from 'react'
+import Auth from './auth'
+import MainPage from './main'
 
-const Main = lazy(() => import(/* webpackChunkName: 'dashboard' */ './main'))
-const Auth = lazy(() => import(/* webpackChunkName: 'auth' */ './auth'))
-
-export { Main, Auth }
+export { MainPage, Auth }

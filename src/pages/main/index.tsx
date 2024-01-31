@@ -1,23 +1,16 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
-import { RouterConstants } from 'shared/constants/routerConstants'
-import MainView from './ui/MainView'
+import { Route, Routes } from 'react-router-dom'
+import Main from './Main'
+import Fortune from 'widgets/fortune'
 
-import AdminLayout from 'shared/layout/AdminLayout'
 
-function Main() {
+function MainPage() {
     return (
         <Routes>
-            <Route element={<AdminLayout />}>
-                <Route path={`/dashboard/*`} element={<MainView />} />
-                <Route
-                    path={`*`}
-                    element={
-                        <Navigate to={RouterConstants.DASHBOARD} replace />
-                    }
-                />
+            <Route element={<Main />}>
+                <Route path={`/fortune`} element={<Fortune />} />
             </Route>
         </Routes>
     )
 }
 
-export default Main
+export default MainPage
