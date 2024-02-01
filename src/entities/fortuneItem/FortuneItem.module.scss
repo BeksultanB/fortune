@@ -5,10 +5,20 @@
     border-radius: 36px;
 }
 .fortuneItem {
+    position: relative;
     display: flex;
     gap: 32px;
     border-radius: 36px;
     align-items: center;
+    font-size: 18px;
+    width: 92%;
+    padding: 32px 24px;
+    transition: all 1s linear;
+    top: auto;
+    flex: 1 1 180px;
+    &:nth-last-child(n) {
+        margin-bottom: 20px;
+    }
 }
 .fortuneIcon {
 }

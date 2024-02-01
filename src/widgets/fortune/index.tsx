@@ -11,38 +11,25 @@ import slides from './slides';
 
 import s from './fortune.module.scss';
 import FortuneItem from 'entities/fortuneItem';
+import { cloneElement } from 'react';
 
 function Fortune({ swiperRef, spinHandler }: any) {
+    let clones: any = [];
+
     return (
         <>
-            <Swiper
-                loop
-                freeMode={true}
-                slidesPerView={9}
-                spaceBetween={30}
-                centeredSlides={true}
-                speed={1000}
-                modules={[Autoplay]}
-                direction='vertical'
-                className="mySwiper"
-                autoplay={{
-                    delay: 0,
-                    disableOnInteraction: false,
-                }}
-                onSwiper={(swiper) => {
-                    swiperRef.current = swiper;
-                }}
-            >
-                {slides.map(slide => (
-                    <SwiperSlide
-                        key={slide.value}
-                        className={s.slide}
-                        style={{ background: slide.color }}>
-                        <FortuneItem wrapped data={slide} />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-            <div className={s.shadowBox}>
+            <div className={s.swiper}>
+                {slides.map((slide, index) => {
+                    const item = (<FortuneItem key={slide.value} dataindex={index} data={slide} />);
+                    clones.push(cloneElement(item, { key: `${slide.value}-clone` }))
+
+                    return item
+                })}
+            </div>
+            <div className={s.swiperClone}>
+                {clones}
+            </div>
+            <div className={s.shadowBox} >
                 <div className={s.spinWrapper}>
                     <Spin
                         swiperRef={swiperRef}

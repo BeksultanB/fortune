@@ -1,3 +1,26 @@
+@keyframes moveUp {
+    0% {
+        top: 100%;
+    }
+    100% {
+        top: calc(-4400px + 100%);
+    }
+}
+.swiper,
+.swiperClone {
+    height: 2200px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    left: 0px;
+    top: 0;
+    animation: moveUp 2s linear infinite;
+}
+.swiperClone {
+    animation-delay: -1000ms;
+}
 .slide {
     display: flex;
     gap: 32px;
