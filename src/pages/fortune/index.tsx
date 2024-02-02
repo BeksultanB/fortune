@@ -34,7 +34,7 @@ function FortunePage() {
     return (
         <div className={s.container} ref={containerRef}>
             <div className={s.rouletteWrapper}>
-                <Fortune spinCounter={spinCounter} reelRef={reelRef} spinHandler={handleSpin} />
+                <Fortune {...{ spinCounter, reelRef, prize }} spinHandler={handleSpin} />
             </div>
             <div className={s.content}>
                 {

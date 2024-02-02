@@ -14,7 +14,7 @@ const Spin = ({ reelRef, onSpin, prize }: any) => {
                 { top: 0, filter: "blur(0)" },
                 { filter: "blur(4px)", offset: 0.5 },
                 {
-                    top: `-${65 * 200 + (getRandomNumber(-5, 5) * 10)}px`,
+                    top: `-${65 * 200 + (getRandomNumber(-4, 4) * 10)}px`,
 
                     filter: "blur(0)",
                 },
@@ -27,8 +27,8 @@ const Spin = ({ reelRef, onSpin, prize }: any) => {
             animation.onfinish = () => {
                 setTimeout(() => {
                     setSpinning(() => false)
-                    onSpin((prize), 700)
-                })
+                    onSpin((prize))
+                }, 700)
             }
         }
     }
