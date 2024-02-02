@@ -6,25 +6,34 @@ import Subtitle from "shared/ui/Subtitle";
 import Text from "shared/ui/Text";
 import FortuneTriangle from "shared/ui/icon/FortuneTriangle";
 import FortuneCongratulations from "entities/fortuneCongratulations";
+import slides from "widgets/fortune/slides";
 
 function FortunePage() {
     const [prize, setPrize] = useState<any>(null);
     const [spinCounter, setSpinCounter] = useState<any>(0);
     const [showCongratulations, setShowCongratulations] = useState<any>(false);
     const reelRef = useRef<any>(null);
+    const containerRef = useRef<any>(null);
+
 
     const startAutoplay = () => {
         setSpinCounter(spinCounter + 1)
         setShowCongratulations(false)
     };
 
-    const handleSpin = (prize: any) => {
-        setPrize(prize)
+    const handleSpin = () => {
         setShowCongratulations(true);
+        const nodes = document.elementsFromPoint(reelRef.current.clientWidth / 2, containerRef.current.clientHeight / 2);
+        const currentItem = nodes.find(node => node.className.includes("fortuneSlot"));
+        //@ts-ignore
+        const value = currentItem.dataset.value
+        console.dir(currentItem)
+        const prize = slides.find(item => item.value === value)
+        setPrize(prize)
     }
 
     return (
-        <div className={s.container}>
+        <div className={s.container} ref={containerRef}>
             <div className={s.rouletteWrapper}>
                 <Fortune spinCounter={spinCounter} reelRef={reelRef} spinHandler={handleSpin} />
             </div>

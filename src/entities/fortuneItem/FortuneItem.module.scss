@@ -15,12 +15,10 @@
     padding: 32px 24px;
     transition: all 1s linear;
     top: auto;
-    flex: 1 1 180px;
-    // &:nth-last-child(n) {
-    //     margin-bottom: 20px;
-    // }
 }
 .fortuneIcon {
+    max-width: 110px;
+    max-height: 110px;
 }
 .fortuneContent {
     display: flex;

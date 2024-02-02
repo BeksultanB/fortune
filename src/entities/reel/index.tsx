@@ -7,7 +7,11 @@ const Reel = ({ reelsData, className = "", reelRef, ...props }: any) => {
     return (
         <div className={clsx(s.reel, className)} ref={reelRef} {...props}>
             {reelsData?.map((data: any, index: any) => {
-                return (<FortuneItem key={data.value + index} dataindex={index} data={data} />)
+                return (
+                    <div key={data.value + index} className={clsx("fortuneSlot", s.fortuneSlot)} data-value={data.value}>
+                        <FortuneItem dataindex={index} data={data} />
+                    </div>
+                )
             })}
         </div>
     );

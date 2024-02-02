@@ -10,8 +10,10 @@ const FortuneItem = ({ data, wrapped = false, className = "", iconProps, style, 
     const ownClass = wrapped ? s.fortuneItemWrapped : s.fortuneItem;
 
     return (
-        <div className={clsx(ownClass, className)} style={{ ...ownStyle, ...style }} {...props}>
-            <div className={clsx("fortuneIcon", s.fortuneIcon)}><Icon {...iconProps} /></div>
+        <div className={clsx("fortuneItem", ownClass, className)} style={{ ...ownStyle, ...style }} {...props}>
+            <div className={clsx("fortuneIcon", s.fortuneIcon)}>
+                <Icon width={100} height={100} {...iconProps} />
+            </div>
             <div className={s.fortuneContent}>
                 <Subtitle>{label}</Subtitle>
                 <Text>{count}</Text>
