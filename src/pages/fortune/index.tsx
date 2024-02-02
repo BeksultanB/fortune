@@ -9,23 +9,24 @@ import FortuneCongratulations from "entities/fortuneCongratulations";
 
 function FortunePage() {
     const [prize, setPrize] = useState<any>(null);
+    const [spinCounter, setSpinCounter] = useState<any>(0);
     const [showCongratulations, setShowCongratulations] = useState<any>(false);
-    const swiperRef = useRef<any>(null);
+    const reelRef = useRef<any>(null);
 
     const startAutoplay = () => {
+        setSpinCounter(spinCounter + 1)
         setShowCongratulations(false)
-        swiperRef.current.autoplay.start()
     };
 
-    const handleSpin = (slide: any) => {
-        setPrize(slide)
+    const handleSpin = (prize: any) => {
+        setPrize(prize)
         setShowCongratulations(true);
     }
 
     return (
         <div className={s.container}>
             <div className={s.rouletteWrapper}>
-                <Fortune swiperRef={swiperRef} spinHandler={handleSpin} />
+                <Fortune spinCounter={spinCounter} reelRef={reelRef} spinHandler={handleSpin} />
             </div>
             <div className={s.content}>
                 {

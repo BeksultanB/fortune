@@ -16,9 +16,9 @@
     transition: all 1s linear;
     top: auto;
     flex: 1 1 180px;
-    &:nth-last-child(n) {
-        margin-bottom: 20px;
-    }
+    // &:nth-last-child(n) {
+    //     margin-bottom: 20px;
+    // }
 }
 .fortuneIcon {
 }

@@ -6,27 +6,6 @@
         top: calc(-4400px + 100%);
     }
 }
-.swiper,
-.swiperClone {
-    height: 2200px;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    left: 0px;
-    top: 0;
-    animation: moveUp 2s linear infinite;
-}
-.swiperClone {
-    animation-delay: -1000ms;
-}
-.slide {
-    display: flex;
-    gap: 32px;
-    flex: 1 1 180px;
-    border-radius: 36px;
-}
 .shadowBox {
     top: 0;
     left: 0;
@@ -40,7 +19,7 @@
     justify-content: flex-end;
     padding: 0 28px 30px;
 }
-.spinWrapper {
+.buttonWrapper {
     display: flex;
     flex-direction: column;
     height: 80px;

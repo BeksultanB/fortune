@@ -1,0 +1,10 @@
+.reel {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    left: 0px;
+    top: 0;
+    animation: moveUp 2s linear infinite;
+}

@@ -1,41 +1,32 @@
 import Spin from 'features/spin';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
+import Reel from 'entities/reel';
 import slides from './slides';
 
 import s from './fortune.module.scss';
-import FortuneItem from 'entities/fortuneItem';
-import { cloneElement } from 'react';
+import shuffleArray from 'shared/utils/shuffleArray';
+import { useEffect, useState } from 'react';
 
-function Fortune({ swiperRef, spinHandler }: any) {
-    let clones: any = [];
 
+function Fortune({ spinCounter, reelRef, spinHandler }: any) {
+    let [reelsData, setReelsData] = useState<any>(shuffleArray(slides));
+    let multipleReelsData: any = [];
+    for (let i = 0; multipleReelsData.length < 80; i++) {
+        multipleReelsData = [...multipleReelsData, ...reelsData];
+    }
+    multipleReelsData.length = 80;
+    const prize = multipleReelsData[66];
+
+    useEffect(() => {
+        if (spinCounter) {
+            setReelsData(shuffleArray(slides))
+        }
+    }, [spinCounter]);
     return (
         <>
-            <div className={s.swiper}>
-                {slides.map((slide, index) => {
-                    const item = (<FortuneItem key={slide.value} dataindex={index} data={slide} />);
-                    clones.push(cloneElement(item, { key: `${slide.value}-clone` }))
-
-                    return item
-                })}
-            </div>
-            <div className={s.swiperClone}>
-                {clones}
-            </div>
+            <Reel {...{ reelRef, reelsData: multipleReelsData }} />
             <div className={s.shadowBox} >
-                <div className={s.spinWrapper}>
-                    <Spin
-                        swiperRef={swiperRef}
-                        slides={slides}
-                        onSpin={spinHandler}
-                    />
+                <div className={s.buttonWrapper}>
+                    <Spin {...{ reelRef, prize, onSpin: spinHandler }} />
                 </div>
             </div>
         </>
