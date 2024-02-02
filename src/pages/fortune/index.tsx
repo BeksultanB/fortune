@@ -27,7 +27,6 @@ function FortunePage() {
         const currentItem = nodes.find(node => node.className.includes("fortuneSlot"));
         //@ts-ignore
         const value = currentItem.dataset.value
-        console.dir(currentItem)
         const prize = slides.find(item => item.value === value)
         setPrize(prize)
     }

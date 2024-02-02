@@ -20,7 +20,7 @@ const Spin = ({ reelRef, onSpin, prize }: any) => {
                 },
             ],
                 {
-                    duration: 2000,
+                    duration: 6000,
                     easing: "cubic-bezier(0.8, 0.3, 0.2, 0.9)",
                     fill: 'forwards'
                 })

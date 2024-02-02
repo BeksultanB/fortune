@@ -4,7 +4,7 @@ import Subtitle from "shared/ui/Subtitle";
 import Text from "shared/ui/Text";
 
 const FortuneItem = ({ data, wrapped = false, className = "", iconProps, style, ...props }: any) => {
-    const { icon: Icon, label, value, count, color } = data;
+    const { icon: Icon, label, count, color } = data;
 
     const ownStyle = wrapped ? {} : { background: color };
     const ownClass = wrapped ? s.fortuneItemWrapped : s.fortuneItem;

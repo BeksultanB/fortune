@@ -1,5 +1,5 @@
 function getRandomNumber(min: number, max: number) {
-    const numbers = Array.from({ length: max - min + 1 }, (v, k) => k + min)
+    const numbers = Array.from({ length: max - min + 1 }, (_, k) => k + min)
 
     for (let i = numbers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1))
