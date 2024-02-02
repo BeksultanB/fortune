@@ -15,6 +15,7 @@ function FortuneCongratulations({ prize, ...props }: any) {
             const you = document.querySelector("." + s.you)
             const win = document.querySelector("." + s.win)
             const prize = document.querySelector("." + s.prize)
+            const congratulations = document.querySelector("." + s.congratulations)
 
             //@ts-ignore
             subtitle && (subtitle.style.left = "0")
@@ -24,6 +25,8 @@ function FortuneCongratulations({ prize, ...props }: any) {
             win && (win.style.left = "0");
             //@ts-ignore
             prize && (prize.style.left = "0");
+            //@ts-ignore
+            congratulations && (congratulations.style.backgroundColor = "rgba(9, 13, 30, 0.8)");
         }, 500)
 
     }, []);
