@@ -1,19 +1,18 @@
 
-import FortuneItemForm from "widgets/fortuneItemForm";
-import s from "./AdminView.module.scss"
 import Subtitle from "shared/ui/Subtitle";
+import s from "./AdminView.module.scss"
 
-const AdminView = ({ mode, setMode }: any) => {
+const AdminView = ({ form, list }: any) => {
 
     return (
         <div className={s.container}>
             <div className={s.form}>
                 <Subtitle>Добавление призов</Subtitle>
-                <FortuneItemForm mode={mode} />
+                {form}
             </div>
             <div className={s.content} >
                 <Subtitle>Список призов</Subtitle>
-                {/* <FortuneItemsList  /> */}
+                {list}
             </div>
         </div>
     );

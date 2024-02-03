@@ -2,39 +2,44 @@
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import s from "./FortuneItemForm.module.scss"
 import FortuneItem from "entities/fortuneItem";
-import BallIcon from "shared/ui/icon/BallIcon";
 import { FC, useEffect } from "react";
 import SvgInput from "shared/components/SvgInput";
 import TextInput from "shared/components/TextInput";
 import ColorInput from "shared/components/ColorInput";
 import SvgPreviewer from "shared/components/SvgPreviewer";
+import IFortuneItem from "shared/api/IndexedDB/FortuneItems/model";
+import { DefaultFortuneItemIcon } from "shared/api/IndexedDB/FortuneItems/initialData";
+import Button from "shared/ui/buttons/Button";
 
+export type Mode = "create" | "update"
 
 interface Props {
-    mode: "create" | "update",
-    data?: any
+    mode: Mode,
+    data?: any,
+    setData?: any,
+    submitHandler?: any
 }
 
-const FortuneItemForm: FC<Props> = ({ mode, data, submitHandler }: any) => {
-    const methods = useForm({
-        defaultValues: {
-            icon: BallIcon,
-            value: 'AAAAA',
-            label: 'LLLL',
-            color: 'grey',
-        }
-    })
-    const { handleSubmit, control, watch } = methods;
+const defaultValues = {
+    icon: DefaultFortuneItemIcon,
+    value: '',
+    label: '',
+    color: '#f0f0f0',
+}
+
+const FortuneItemForm: FC<Props> = ({ mode, data, setData, submitHandler }: any) => {
+    const methods = useForm<IFortuneItem>({ defaultValues })
+    const { handleSubmit, control, watch, reset } = methods;
     watch()
 
-    function onSubmit(data: any) {
-        submitHandler(data);
-        methods.reset(data);
+    async function onSubmit(data: any) {
+        await submitHandler(data);
+        if ("success") reset(defaultValues);
     }
 
     useEffect(() => {
-        (mode === "update") && methods.reset(data)
-    }, [data]);
+        (mode === "update") && reset(data)
+    }, [data, mode]);
 
     return (
         <FormProvider {...methods}>
@@ -69,20 +74,13 @@ const FortuneItemForm: FC<Props> = ({ mode, data, submitHandler }: any) => {
                         <Controller
                             control={control}
                             name="icon"
-                            render={({ field }: any) => {
-                                function handleSvgChange(svg: any) {
-                                    const Icon: any = (props: any) => <SvgPreviewer svg={svg} {...props} />
-                                    field.onChange(Icon);
-                                }
-
-                                return (
-                                    <SvgInput
-                                        defaultValue={field.value}
-                                        onChange={handleSvgChange}
-                                        placeholder="Выберите картинку"
-                                    />
-                                )
-                            }}
+                            render={({ field }: any) => (
+                                <SvgInput
+                                    defaultValue={field.value}
+                                    onChange={field.onChange}
+                                    placeholder="Выберите картинку"
+                                />
+                            )}
                         />
 
                         <Controller
@@ -95,6 +93,15 @@ const FortuneItemForm: FC<Props> = ({ mode, data, submitHandler }: any) => {
                                 />
                             )}
                         />
+                    </div>
+                    <div className={s.buttons}>
+                        <Button className={s.resetButton} onClick={(e: any) => {
+                            e.preventDefault();
+                            setData(defaultValues)
+                        }}>
+                            Очистить
+                        </Button>
+                        <Button className={s.saveButton} type="submit">Сохранить</Button>
                     </div>
                 </form>
                 <div className={s.previewContainer}>

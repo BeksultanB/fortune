@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import s from "./FortunePage.module.scss"
 import Fortune from "widgets/fortune";
 import LastPrizes from "widgets/lastPrizes";
@@ -6,11 +6,13 @@ import Subtitle from "shared/ui/Subtitle";
 import Text from "shared/ui/Text";
 import FortuneTriangle from "shared/ui/icon/FortuneTriangle";
 import FortuneCongratulations from "entities/fortuneCongratulations";
-import fortuneItems from "shared/constants/fortuneItems";
+// import fortuneItems from "shared/constants/fortuneItems";
 import { useNavigate } from "react-router-dom";
+import { getList } from "shared/api/IndexedDB/FortuneItems/crud";
 
 function FortunePage() {
     const [prize, setPrize] = useState<any>(null);
+    const [list, setList] = useState<any>([])
     const [spinCounter, setSpinCounter] = useState<any>(0);
     const [showCongratulations, setShowCongratulations] = useState<any>(false);
     const reelRef = useRef<any>(null);
@@ -28,16 +30,22 @@ function FortunePage() {
         const currentItem = nodes.find(node => node.className.includes("fortuneSlot"));
         //@ts-ignore
         const value = currentItem.dataset.value
-        const prize = fortuneItems.find(item => item.value === value)
+        const prize = list.find((item: any) => item.value === value)
         setPrize(prize)
     }
 
     function navigateToAdmin(e: any) {
         if (e.code === "KeyA") {
-            console.log("A")
             navigate("/admin")
         }
     }
+    async function fetchList() {
+        setList(await getList())
+    }
+
+    useEffect(() => {
+        fetchList()
+    }, []);
 
     return (
         <div className={s.container} ref={containerRef}>

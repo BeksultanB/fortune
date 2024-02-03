@@ -31,7 +31,7 @@ const LastPrizes = ({ prize, className = "", ...props }: any) => {
                             style={{ background: "#f6f6f6" }}
                             className={s.prize}
                             key={prizeData.value + i}
-                            iconProps={{ arcColor: "#FFCE21", style: { width: "100%", height: "100%" } }}
+                            iconProps={{ width: "80", height: "80" }}
                             data={prizeData}
                         />
                     )

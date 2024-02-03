@@ -24,6 +24,7 @@
 }
 .secretDoor {
     flex: 0 0 50px;
+    cursor: help;
     &:focus-visible {
         outline: none;
     }

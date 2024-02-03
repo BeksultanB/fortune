@@ -1,10 +1,27 @@
+@keyframes moveUpDown {
+    0% {
+        background-position: 25% 10%;
+    }
+    50% {
+        background-position: 25% 50%;
+    }
+    100% {
+        background-position: 25% 10%;
+    }
+}
 .container {
     display: flex;
     flex: 1 1 1366px;
-    min-height: 100%;
+    max-height: 100vh;
     position: relative;
     padding: 50px;
     gap: 20px;
+    background-color: black;
+    background: no-repeat url(./background-admin.avif);
+    background-size: auto;
+    background-position: 25% 10%;
+    animation: moveUpDown 10s infinite ease-in-out;
+    transform: translate3d(0, 0, 0);
 }
 
 .form {
@@ -23,9 +40,25 @@
     justify-content: space-between;
     position: relative;
     gap: 20px;
+    max-height: 100%;
+    overflow: auto;
     :global {
         .subtitle {
             text-align: center;
         }
+    }
+    &::-webkit-scrollbar {
+        width: 10px;
+        background-color: #f9f9fd;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #d1d1d1;
+        border-radius: 10px;
+        border: 2px solid #f9f9fd;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #a8a8a8;
     }
 }

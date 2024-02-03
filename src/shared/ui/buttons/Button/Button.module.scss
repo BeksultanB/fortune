@@ -1,0 +1,19 @@
+.button {
+    background: #19a648;
+    border-radius: 16px;
+    flex: 1 1 100%;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    font-family: 'CeraPro';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+        background: #0b6128;
+        color: rgb(177, 177, 177);
+    }
+}

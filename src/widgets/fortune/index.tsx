@@ -1,37 +1,47 @@
 import Spin from 'features/spin';
 import Reel from 'entities/reel';
-import fortuneItems from 'shared/constants/fortuneItems';
+// import fortuneItems from 'shared/constants/fortuneItems';
 
 import s from './fortune.module.scss';
 import shuffleArray from 'shared/utils/shuffleArray';
 import { useEffect, useRef, useState } from 'react';
+import { getList } from 'shared/api/IndexedDB/FortuneItems/crud';
 
 
 function Fortune({ spinCounter, reelRef, spinHandler, prize }: any) {
     const exceptions = useRef<any>([]);
-    const [reelsData, setReelsData] = useState<any>(shuffleArray(fortuneItems));
+    const [reelsData, setReelsData] = useState<any>([]);
     const filteredData = reelsData.filter((item: any) => !exceptions.current.includes(item));
     let multipleReelsData: any = [];
 
-    for (let i = 0; multipleReelsData.length < 80; i++) {
-        multipleReelsData = [...multipleReelsData, ...filteredData];
+    if (reelsData.length) {
+        for (let i = 0; multipleReelsData.length < 80; i++) {
+            multipleReelsData = [...multipleReelsData, ...filteredData];
+        }
+        multipleReelsData.length = 80;
     }
-    multipleReelsData.length = 80;
+    async function fetchList() {
+        const list = await getList();
+        setReelsData(list)
+    }
 
     useEffect(() => {
         if (spinCounter) {
-            setReelsData(shuffleArray(fortuneItems))
+            setReelsData(shuffleArray(reelsData))
         }
     }, [spinCounter]);
     useEffect(() => {
         if (prize) {
-            if (exceptions.current.length === (fortuneItems.length - 1)) {
+            if (exceptions.current.length === (reelsData.length - 1)) {
                 exceptions.current = [];
             } else {
                 exceptions.current = [...exceptions.current, prize]
             }
         }
     }, [prize]);
+    useEffect(() => {
+        fetchList()
+    }, []);
 
     return (
         <>
