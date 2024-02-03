@@ -6,7 +6,8 @@ import Subtitle from "shared/ui/Subtitle";
 import Text from "shared/ui/Text";
 import FortuneTriangle from "shared/ui/icon/FortuneTriangle";
 import FortuneCongratulations from "entities/fortuneCongratulations";
-import slides from "widgets/fortune/slides";
+import fortuneItems from "shared/constants/fortuneItems";
+import { useNavigate } from "react-router-dom";
 
 function FortunePage() {
     const [prize, setPrize] = useState<any>(null);
@@ -14,7 +15,7 @@ function FortunePage() {
     const [showCongratulations, setShowCongratulations] = useState<any>(false);
     const reelRef = useRef<any>(null);
     const containerRef = useRef<any>(null);
-
+    const navigate = useNavigate()
 
     const startAutoplay = () => {
         setSpinCounter(spinCounter + 1)
@@ -27,8 +28,15 @@ function FortunePage() {
         const currentItem = nodes.find(node => node.className.includes("fortuneSlot"));
         //@ts-ignore
         const value = currentItem.dataset.value
-        const prize = slides.find(item => item.value === value)
+        const prize = fortuneItems.find(item => item.value === value)
         setPrize(prize)
+    }
+
+    function navigateToAdmin(e: any) {
+        if (e.code === "KeyA") {
+            console.log("A")
+            navigate("/admin")
+        }
     }
 
     return (
@@ -37,6 +45,7 @@ function FortunePage() {
                 <Fortune {...{ spinCounter, reelRef, prize }} spinHandler={handleSpin} />
             </div>
             <div className={s.content}>
+                <div className={s.secretDoor} tabIndex={-1} onKeyDown={navigateToAdmin}></div>
                 {
                     prize ?
                         <LastPrizes prize={prize} /> :
@@ -46,6 +55,7 @@ function FortunePage() {
                         </div>
                 }
                 <div className={s.triangleWrapper}><FortuneTriangle /></div>
+                <div className="toJustifyContent"></div>
             </div>
             {showCongratulations && <FortuneCongratulations prize={prize} onOutsideClick={startAutoplay} />}
         </div>

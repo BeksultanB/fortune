@@ -1,7 +1,7 @@
 import { RouterConstants } from 'shared/constants/routerConstants'
 
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { Auth, Main } from 'pages'
+import { Admin, Auth, Main } from 'pages'
 
 export default function Routing() {
     return (
@@ -19,7 +19,12 @@ export default function Routing() {
                         <Auth />
                     }
                 />
-
+                <Route
+                    path={RouterConstants.ADMIN}
+                    element={
+                        <Admin />
+                    }
+                />
                 <Route
                     path="*"
                     element={

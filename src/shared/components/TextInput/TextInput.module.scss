@@ -1,0 +1,25 @@
+.wrapper {
+    position: relative;
+    width: 300px;
+    height: 40px;
+}
+.input {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'CeraPro';
+    font-size: 20px;
+    color: #333;
+    background: #f0f0f0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    &:focus {
+        outline: none;
+        background: #ddd;
+    }
+}

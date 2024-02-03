@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex: 1 1 1366px;
+    min-height: 100%;
+    position: relative;
+    padding: 50px;
+    gap: 20px;
+}
+
+.form {
+    flex: 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    gap: 20px;
+}
+
+.content {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    gap: 20px;
+    :global {
+        .subtitle {
+            text-align: center;
+        }
+    }
+}

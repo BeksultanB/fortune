@@ -1,6 +1,6 @@
 import Spin from 'features/spin';
 import Reel from 'entities/reel';
-import slides from './slides';
+import fortuneItems from 'shared/constants/fortuneItems';
 
 import s from './fortune.module.scss';
 import shuffleArray from 'shared/utils/shuffleArray';
@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from 'react';
 
 function Fortune({ spinCounter, reelRef, spinHandler, prize }: any) {
     const exceptions = useRef<any>([]);
-    const [reelsData, setReelsData] = useState<any>(shuffleArray(slides));
+    const [reelsData, setReelsData] = useState<any>(shuffleArray(fortuneItems));
     const filteredData = reelsData.filter((item: any) => !exceptions.current.includes(item));
     let multipleReelsData: any = [];
 
@@ -20,12 +20,12 @@ function Fortune({ spinCounter, reelRef, spinHandler, prize }: any) {
 
     useEffect(() => {
         if (spinCounter) {
-            setReelsData(shuffleArray(slides))
+            setReelsData(shuffleArray(fortuneItems))
         }
     }, [spinCounter]);
     useEffect(() => {
         if (prize) {
-            if (exceptions.current.length === (slides.length - 1)) {
+            if (exceptions.current.length === (fortuneItems.length - 1)) {
                 exceptions.current = [];
             } else {
                 exceptions.current = [...exceptions.current, prize]

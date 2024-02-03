@@ -1,0 +1,28 @@
+.wrapper {
+    position: relative;
+    width: 300px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.colorInput {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    padding: 0;
+    opacity: 0;
+    z-index: 2;
+}
+.preview {
+    width: 40px;
+    height: 100%;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}

@@ -1,4 +1,4 @@
-import AuthView from './ui'
+import AuthView from './AuthView'
 
 function Auth() {
     return (

@@ -10,7 +10,7 @@ function Main() {
         <Routes>
             <Route element={<MainPage />}>
                 <Route path={`/fortune`} element={<FortunePage />} />
-                <Route path={`*`} element={<Navigate to={`${pathname}/fortune`} />} />
+                <Route path={`/*`} element={<Navigate to={`${pathname}/fortune`} />} />
             </Route>
         </Routes>
     )

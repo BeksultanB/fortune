@@ -1,5 +1,5 @@
 
-const BallIcon = ({ arcColor = "rgba(5, 7, 13, 0.10)", ...props }) => {
+const BallIcon = ({ arcColor = "rgba(5, 7, 13, 0.10)", ...props } = {}) => {
     return (
         <svg width="110" height="111" viewBox="0 0 110 111" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
             <rect y="0.742004" width="110" height="110" rx="55" fill={arcColor} />
