@@ -3,6 +3,7 @@ import AdminView from './AdminView'
 import FortuneItemForm, { Mode } from 'widgets/fortuneItemForm';
 import { deleteSingle, getList, updateSingle } from 'shared/api/IndexedDB/FortuneItems/crud';
 import FortuneItemsList from 'widgets/FortuneItemsList';
+import seedFortuneItems from 'shared/api/IndexedDB/seeder';
 
 function Admin() {
     const [formMode, setFormMode] = useState<Mode>("create");
@@ -32,6 +33,8 @@ function Admin() {
     useEffect(() => {
         fetchList()
     }, []);
+
+    // seedFortuneItems()
 
     return (
         <AdminView
