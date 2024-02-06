@@ -5,7 +5,7 @@ import FortuneItem from "entities/fortuneItem";
 const Reel = ({ reelsData, className = "", reelRef, ...props }: any) => {
 
     return (
-        <div className={clsx(s.reel, className)} ref={reelRef} {...props}>
+        <div className={clsx("reel", s.reel, className)} ref={reelRef} {...props}>
             {reelsData?.map((data: any, index: any) => {
                 return (
                     <div key={data.value + index} className={clsx("fortuneSlot", s.fortuneSlot)} data-value={data.value}>

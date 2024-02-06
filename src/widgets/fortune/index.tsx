@@ -15,10 +15,10 @@ function Fortune({ spinCounter, reelRef, spinHandler, prize }: any) {
     let multipleReelsData: any = [];
 
     if (reelsData.length) {
-        for (let i = 0; multipleReelsData.length < 80; i++) {
+        for (let i = 0; multipleReelsData.length < 100; i++) {
             multipleReelsData = [...multipleReelsData, ...filteredData];
         }
-        multipleReelsData.length = 80;
+        multipleReelsData.length = 100;
     }
     async function fetchList() {
         const list = await getList();

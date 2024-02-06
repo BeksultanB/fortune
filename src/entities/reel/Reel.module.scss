@@ -1,3 +1,11 @@
+.fortuneSlot {
+    position: relative;
+    flex: 1 1 200px;
+    width: 92%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
 .reel {
     position: absolute;
     display: flex;
@@ -14,12 +22,99 @@
             width: 100%;
         }
     }
+    @media (min-height: 240px) and (max-height: 350px) {
+        top: -140px;
+    }
+    @media (min-height: 350px) and (max-height: 470px) {
+        top: -280px;
+    }
+    @media (min-height: 470px) and (max-height: 590px) {
+        top: -420px;
+    }
+    @media (min-height: 590px) and (max-height: 710px) {
+        top: -560px;
+    }
+    @media (min-height: 710px) and (max-height: 830px) {
+        top: -700px;
+    }
+    @media (min-height: 830px) and (max-height: 950px) {
+        top: -840px;
+    }
+    @media (min-height: 950px) and (max-height: 1070px) {
+        top: -980px;
+    }
+    @media (min-height: 1070px) and (max-height: 1190px) {
+        top: -1120px;
+    }
+    @media (min-height: 1190px) and (max-height: 1310px) {
+        top: -1260px;
+    }
+    @media (min-height: 1310px) and (max-height: 1430px) {
+        top: -1400px;
+    }
+    @media (min-height: 1430px) and (max-height: 1550px) {
+        top: -1540px;
+    }
+    @media (min-height: 1550px) and (max-height: 1670px) {
+        top: -1680px;
+    }
+    @media (min-height: 1670px) and (max-height: 1790px) {
+        top: -1820px;
+    }
+    @media (min-height: 1790px) and (max-height: 1910px) {
+        top: -1960px;
+    }
+    @media (min-height: 1910px) and (max-height: 2030px) {
+        top: -2100px;
+    }
+    @media (min-height: 2030px) and (max-height: 2150px) {
+        top: -2240px;
+    }
+    @media (min-height: 2150px) and (max-height: 2270px) {
+        top: -2380px;
+    }
+    @media (min-height: 2270px) and (max-height: 2390px) {
+        top: -2520px;
+    }
+    @media (min-height: 2390px) and (max-height: 2510px) {
+        top: -2660px;
+    }
+    @media (min-height: 2510px) and (max-height: 2630px) {
+        top: -2800px;
+    }
+    @media (min-height: 2630px) and (max-height: 2750px) {
+        top: -2940px;
+    }
+    @media (min-height: 2750px) and (max-height: 2870px) {
+        top: -3080px;
+    }
+    @media (min-height: 2870px) and (max-height: 2990px) {
+        top: -3220px;
+    }
+    @media (min-height: 2990px) and (max-height: 3110px) {
+        top: -3360px;
+    }
+    @media (min-height: 3110px) and (max-height: 3230px) {
+        top: -3500px;
+    }
+    @media (min-height: 3230px) and (max-height: 3350px) {
+        top: -3640px;
+    }
+    @media (min-height: 3350px) and (max-height: 3470px) {
+        top: -3780px;
+    }
+    @media (min-height: 3470px) and (max-height: 3590px) {
+        top: -3920px;
+    }
+    @media (min-height: 3590px) and (max-height: 3710px) {
+        top: -4060px;
+    }
+    @media (min-height: 3710px) and (max-height: 3830px) {
+        top: -4200px;
+    }
+    @media (min-height: 3830px) and (max-height: 3950px) {
+        top: -4340px;
+    }
 }
-.fortuneSlot {
-    position: relative;
-    flex: 1 1 200px;
-    width: 92%;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 20px;
-}
+
+// 170

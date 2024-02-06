@@ -1,26 +1,25 @@
 import SpinButton from "entities/spinButton";
 import { useEffect, useState } from "react";
-import getRandomNumber from "shared/utils/getRandomNumber";
 
 const Spin = ({ reelRef, onSpin, prize }: any) => {
     const [spinning, setSpinning] = useState<any>(false);
     const [reel, setReel] = useState<any>(null);
+    const [top, setTop] = useState(0)
 
 
     const spinHandler = () => {
         if (!spinning) {
             setSpinning(() => true)
             const animation = reel?.animate([
-                { top: 0, filter: "blur(0)" },
+                { top, filter: "blur(0)" },
                 { filter: "blur(2px)", offset: 0.5 },
                 {
-                    top: `-${65 * 200 + (getRandomNumber(-4, 4) * 10)}px`,
-
+                    top: `calc(${-(65 * 200)}px + (${top}))`,
                     filter: "blur(0)",
                 },
             ],
                 {
-                    duration: 8000,
+                    duration: 1000,
                     easing: "cubic-bezier(0.7, 0.3, 0.2, 0.9)",
                     fill: 'forwards'
                 })
@@ -35,6 +34,8 @@ const Spin = ({ reelRef, onSpin, prize }: any) => {
 
     useEffect(() => {
         setReel(reelRef.current)
+        // @ts-ignore
+        setTop(getComputedStyle(reelRef.current).top)
     }, [reelRef.current]);
 
     return (
