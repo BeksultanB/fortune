@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import s from "./LastPrizes.module.scss"
 import Subtitle from "shared/ui/Subtitle";
@@ -7,22 +7,17 @@ import Text from "shared/ui/Text";
 import FortuneItem from "entities/fortuneItem";
 
 const LastPrizes = ({ prize, className = "", list, ...props }: any) => {
-    const [prizes, setPrizes] = useState<any>([prize]);
-    const prevList = useRef(list)
+    const [prizes, setPrizes] = useState<any>([]);
 
     useEffect(() => {
-        if (list !== prevList) {
-            setPrizes([])
-        }
-    }, [list]);
-    useEffect(() => {
-        setPrizes((prev: any) => {
-            if (prev.includes(prize)) {
-                return prev
-            }
-            else return [...prev, prize]
+        setPrizes(() => {
+            const wonPrizes = list.filter((item: any) => {
+                const localState = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
+                return localState[item.value] !== undefined;
+            })
+            return wonPrizes
         })
-    }, [prize])
+    }, [list, Object.keys(JSON.parse(localStorage.getItem("wonPrizes") || "{}")).length])
 
     return (
         <div className={clsx(s.container, className)} {...props}>

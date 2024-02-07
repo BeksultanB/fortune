@@ -1,7 +1,7 @@
 import SpinButton from "entities/spinButton";
 import { useEffect, useState } from "react";
 
-const Spin = ({ reelRef, onSpin, prize }: any) => {
+const Spin = ({ reelRef, onSpin, prize, disabled }: any) => {
     const [spinning, setSpinning] = useState<any>(false);
     const [reel, setReel] = useState<any>(null);
     const [top, setTop] = useState(0)
@@ -11,7 +11,7 @@ const Spin = ({ reelRef, onSpin, prize }: any) => {
         if (!spinning) {
             setSpinning(() => true)
             const animation = reel?.animate([
-                { top, filter: "blur(0)" },
+                { top, filter: "blur(0)", transfrom: "translate3d(0, 0, 0)" },
                 { filter: "blur(2px)", offset: 0.5 },
                 {
                     top: `calc(${-(65 * 200)}px + (${top}))`,
@@ -40,7 +40,7 @@ const Spin = ({ reelRef, onSpin, prize }: any) => {
     }, [reelRef.current]);
 
     return (
-        <SpinButton onClick={spinHandler} disabled={spinning}></SpinButton>
+        <SpinButton onClick={spinHandler} disabled={spinning || disabled}></SpinButton>
     );
 }
 

@@ -7,13 +7,13 @@ import shuffleArray from 'shared/utils/shuffleArray';
 import { useEffect, useRef, useState } from 'react';
 
 
-function Fortune({ spinCounter, reelRef, spinHandler, prize, list, refreshList }: any) {
+function Fortune({ spinCounter, reelRef, spinHandler, prize, list }: any) {
     const exceptions = useRef<any>([]);
     const [reelsData, setReelsData] = useState<any>(list);
     const filteredData = filter(reelsData);
     let multipleReelsData: any = [];
 
-    if (reelsData.length) {
+    if (filteredData.length) {
         for (let i = 0; multipleReelsData.length < 100; i++) {
             multipleReelsData = [...multipleReelsData, ...filteredData];
         }
@@ -21,7 +21,17 @@ function Fortune({ spinCounter, reelRef, spinHandler, prize, list, refreshList }
     }
 
     function filter(dataArray: any) {
-        return dataArray.filter((item: any) => !exceptions.current.includes(item))
+        const localState = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
+        const result = dataArray.map((item: any) => {
+            item.left = item.count - (localState[item.value] || 0);
+            if (item.left === 0) {
+                if (!exceptions.current.includes(item)) {
+                    exceptions.current = [...exceptions.current, item]
+                }
+            }
+            return item
+        })
+        return result.filter((item: any) => !exceptions.current.includes(item))
     }
 
     useEffect(() => {
@@ -32,19 +42,21 @@ function Fortune({ spinCounter, reelRef, spinHandler, prize, list, refreshList }
         }
     }, [spinCounter, list]);
     useEffect(() => {
+        exceptions.current = [];
+    }, [list]);
+    useEffect(() => {
         (async function () {
             if (prize) {
-                console.log(prize)
                 if (prize.left === 0) {
                     exceptions.current = [...exceptions.current, prize];
-                    if (exceptions.current.length === list.length) {
-                        exceptions.current = [];
-                        setTimeout(async () => {
+                    // if (exceptions.current.length === list.length) {
+                    //     exceptions.current = [];
+                    //     setTimeout(async () => {
 
-                            const res = await refreshList();
-                            setReelsData(res)
-                        }, 700)
-                    }
+                    //         const res = await refreshList();
+                    //         setReelsData(res)
+                    //     }, 700)
+                    // }
                 }
             }
         })()
@@ -55,7 +67,7 @@ function Fortune({ spinCounter, reelRef, spinHandler, prize, list, refreshList }
             <Reel {...{ reelRef, reelsData: multipleReelsData }} />
             <div className={s.shadowBox} >
                 <div className={s.buttonWrapper}>
-                    <Spin {...{ reelRef, prize: multipleReelsData[66], onSpin: spinHandler }} />
+                    <Spin {...{ reelRef, prize: multipleReelsData[66], onSpin: spinHandler, disabled: !multipleReelsData.length }} />
                 </div>
             </div>
         </>

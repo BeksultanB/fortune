@@ -18,6 +18,7 @@ function FortunePage() {
     const reelRef = useRef<any>(null);
     const containerRef = useRef<any>(null);
     const navigate = useNavigate();
+    const localState = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
 
     const startAutoplay = () => {
         setSpinCounter(spinCounter + 1)
@@ -26,6 +27,7 @@ function FortunePage() {
 
     const handleSpin = () => {
         setShowCongratulations(true);
+        const wonPrizes = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
         const nodes = document.elementsFromPoint(reelRef.current.clientWidth / 2, containerRef.current.clientHeight / 2);
         const currentItem = nodes.find(node => node.className.includes("fortuneSlot"));
         //@ts-ignore
@@ -34,13 +36,19 @@ function FortunePage() {
             return item.value === value
         })
         prize.left -= 1;
+        wonPrizes[prize.value] = prize.count - prize.left;
+        localStorage.setItem("wonPrizes", JSON.stringify(wonPrizes))
         // console.log(list)
         setPrize(prize)
     }
 
-    function navigateToAdmin(e: any) {
+    function handleHiddenAction(e: any) {
         if (e.code === "KeyA") {
             navigate("/admin")
+        }
+        if (e.code === "KeyR") {
+            localStorage.setItem("wonPrizes", JSON.stringify({}));
+            fetchList()
         }
     }
     async function fetchList() {
@@ -59,9 +67,9 @@ function FortunePage() {
                 <Fortune {...{ spinCounter, reelRef, prize, list }} refreshList={fetchList} spinHandler={handleSpin} />
             </div>
             <div className={s.content}>
-                <div className={s.secretDoor} tabIndex={-1} onKeyDown={navigateToAdmin}></div>
+                <div className={s.secretDoor} tabIndex={-1} onKeyDown={handleHiddenAction}></div>
                 {
-                    prize ?
+                    Object.keys(localState).length ?
                         <LastPrizes prize={prize} list={list} /> :
                         <div className={s.contentWrapper}>
                             <Subtitle className={s.contentTitle}>Пока еще никто <br /> не участвовал</Subtitle>
