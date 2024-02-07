@@ -4,8 +4,19 @@ import Subtitle from "shared/ui/Subtitle";
 import Text from "shared/ui/Text";
 import SvgPreviewer from "shared/components/SvgPreviewer";
 
-const FortuneItem = ({ data, wrapped = false, className = "", iconProps, style, showValue, ...props }: any) => {
-    const { icon, label, value, color } = data;
+const FortuneItem = ({
+    data,
+    wrapped = false,
+    className = "",
+    iconProps,
+    style,
+    showValue,
+    showLeft = false,
+    showDiff = false,
+    showCount,
+    ...props
+}: any) => {
+    const { icon, label, value, count, left, color } = data;
 
     const ownStyle = wrapped ? {} : { background: color };
     const ownClass = wrapped ? s.fortuneItemWrapped : s.fortuneItem;
@@ -17,7 +28,12 @@ const FortuneItem = ({ data, wrapped = false, className = "", iconProps, style, 
             </div>
             <div className={s.fortuneContent}>
                 <Subtitle>{label}</Subtitle>
-                <Text>{showValue && value}</Text>
+                <Text>
+                    {showValue && value + ": "}
+                    {showLeft ? `Осталось призов: ${left}` : ""}
+                    {showCount ? count : ""}
+                    {showDiff ? `Выиграно: ${count - left} из ${count}` : ""}
+                </Text>
             </div>
         </div>
 

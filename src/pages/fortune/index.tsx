@@ -17,7 +17,7 @@ function FortunePage() {
     const [showCongratulations, setShowCongratulations] = useState<any>(false);
     const reelRef = useRef<any>(null);
     const containerRef = useRef<any>(null);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const startAutoplay = () => {
         setSpinCounter(spinCounter + 1)
@@ -30,7 +30,11 @@ function FortunePage() {
         const currentItem = nodes.find(node => node.className.includes("fortuneSlot"));
         //@ts-ignore
         const value = currentItem.dataset.value
-        const prize = list.find((item: any) => item.value === value)
+        const prize = list.find((item: any) => {
+            return item.value === value
+        })
+        prize.left -= 1;
+        // console.log(list)
         setPrize(prize)
     }
 
@@ -40,7 +44,9 @@ function FortunePage() {
         }
     }
     async function fetchList() {
-        setList(await getList())
+        const res = await getList();
+        setList(res)
+        return res
     }
 
     useEffect(() => {
@@ -50,13 +56,13 @@ function FortunePage() {
     return (
         <div className={s.container} ref={containerRef}>
             <div className={s.rouletteWrapper}>
-                <Fortune {...{ spinCounter, reelRef, prize }} spinHandler={handleSpin} />
+                <Fortune {...{ spinCounter, reelRef, prize, list }} refreshList={fetchList} spinHandler={handleSpin} />
             </div>
             <div className={s.content}>
                 <div className={s.secretDoor} tabIndex={-1} onKeyDown={navigateToAdmin}></div>
                 {
                     prize ?
-                        <LastPrizes prize={prize} /> :
+                        <LastPrizes prize={prize} list={list} /> :
                         <div className={s.contentWrapper}>
                             <Subtitle className={s.contentTitle}>Пока еще никто <br /> не участвовал</Subtitle>
                             <Text className={s.contentInfo}>Но вы можете стать первым</Text>

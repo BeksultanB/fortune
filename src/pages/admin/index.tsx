@@ -36,11 +36,13 @@ function Admin() {
 
     return (
         <AdminView
+            mode={formMode}
             form={<FortuneItemForm
                 mode={formMode}
                 data={data}
                 submitHandler={handleSubmit}
                 setData={setData}
+                setMode={setFormMode}
             />}
             list={<FortuneItemsList
                 list={fortuneItems}

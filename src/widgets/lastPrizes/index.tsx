@@ -1,14 +1,20 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import s from "./LastPrizes.module.scss"
 import Subtitle from "shared/ui/Subtitle";
 import Text from "shared/ui/Text";
 import FortuneItem from "entities/fortuneItem";
 
-const LastPrizes = ({ prize, className = "", ...props }: any) => {
+const LastPrizes = ({ prize, className = "", list, ...props }: any) => {
     const [prizes, setPrizes] = useState<any>([prize]);
+    const prevList = useRef(list)
 
+    useEffect(() => {
+        if (list !== prevList) {
+            setPrizes([])
+        }
+    }, [list]);
     useEffect(() => {
         setPrizes((prev: any) => {
             if (prev.includes(prize)) {
@@ -33,6 +39,7 @@ const LastPrizes = ({ prize, className = "", ...props }: any) => {
                             key={prizeData.value + i}
                             iconProps={{ width: "80", height: "80" }}
                             data={prizeData}
+                            showDiff
                         />
                     )
                 })}

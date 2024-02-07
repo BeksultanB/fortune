@@ -19,7 +19,7 @@ const Spin = ({ reelRef, onSpin, prize }: any) => {
                 },
             ],
                 {
-                    duration: 1000,
+                    duration: 8000,
                     easing: "cubic-bezier(0.7, 0.3, 0.2, 0.9)",
                     fill: 'forwards'
                 })
@@ -27,6 +27,7 @@ const Spin = ({ reelRef, onSpin, prize }: any) => {
                 setTimeout(() => {
                     setSpinning(() => false)
                     onSpin((prize))
+                    reel.style.top = top;
                 }, 700)
             }
         }

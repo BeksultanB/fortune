@@ -17,6 +17,7 @@ function FortuneItemsList({ list, fill, deleteSingle }: any) {
                         </div>
                         <FortuneItem
                             showValue
+                            showCount
                             className={s.fortuneItem}
                             data={item}
                             iconProps={{ height: 80, width: 80 }}

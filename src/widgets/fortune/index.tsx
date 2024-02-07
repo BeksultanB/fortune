@@ -5,13 +5,12 @@ import Reel from 'entities/reel';
 import s from './fortune.module.scss';
 import shuffleArray from 'shared/utils/shuffleArray';
 import { useEffect, useRef, useState } from 'react';
-import { getList } from 'shared/api/IndexedDB/FortuneItems/crud';
 
 
-function Fortune({ spinCounter, reelRef, spinHandler, prize }: any) {
+function Fortune({ spinCounter, reelRef, spinHandler, prize, list, refreshList }: any) {
     const exceptions = useRef<any>([]);
-    const [reelsData, setReelsData] = useState<any>([]);
-    const filteredData = reelsData.filter((item: any) => !exceptions.current.includes(item));
+    const [reelsData, setReelsData] = useState<any>(list);
+    const filteredData = filter(reelsData);
     let multipleReelsData: any = [];
 
     if (reelsData.length) {
@@ -20,28 +19,36 @@ function Fortune({ spinCounter, reelRef, spinHandler, prize }: any) {
         }
         multipleReelsData.length = 100;
     }
-    async function fetchList() {
-        const list = await getList();
-        setReelsData(list)
+
+    function filter(dataArray: any) {
+        return dataArray.filter((item: any) => !exceptions.current.includes(item))
     }
 
     useEffect(() => {
         if (spinCounter) {
             setReelsData(shuffleArray(reelsData))
+        } else {
+            setReelsData(list)
         }
-    }, [spinCounter]);
+    }, [spinCounter, list]);
     useEffect(() => {
-        if (prize) {
-            if (exceptions.current.length === (reelsData.length - 1)) {
-                exceptions.current = [];
-            } else {
-                exceptions.current = [...exceptions.current, prize]
+        (async function () {
+            if (prize) {
+                console.log(prize)
+                if (prize.left === 0) {
+                    exceptions.current = [...exceptions.current, prize];
+                    if (exceptions.current.length === list.length) {
+                        exceptions.current = [];
+                        setTimeout(async () => {
+
+                            const res = await refreshList();
+                            setReelsData(res)
+                        }, 700)
+                    }
+                }
             }
-        }
-    }, [prize]);
-    useEffect(() => {
-        fetchList()
-    }, []);
+        })()
+    }, [prize?.left, prize?.value]);
 
     return (
         <>

@@ -2,12 +2,12 @@
 import Subtitle from "shared/ui/Subtitle";
 import s from "./AdminView.module.scss"
 
-const AdminView = ({ form, list }: any) => {
+const AdminView = ({ form, list, mode }: any) => {
 
     return (
         <div className={s.container}>
             <div className={s.form}>
-                <Subtitle>Добавление призов</Subtitle>
+                <Subtitle>{mode === "create" ? "Добавление призов" : "Редактирование призов"}</Subtitle>
                 {form}
             </div>
             <div className={s.content} >

@@ -6,7 +6,6 @@ import { FC, useEffect } from "react";
 import SvgInput from "shared/components/SvgInput";
 import TextInput from "shared/components/TextInput";
 import ColorInput from "shared/components/ColorInput";
-import SvgPreviewer from "shared/components/SvgPreviewer";
 import IFortuneItem from "shared/api/IndexedDB/FortuneItems/model";
 import { DefaultFortuneItemIcon } from "shared/api/IndexedDB/FortuneItems/initialData";
 import Button from "shared/ui/buttons/Button";
@@ -17,7 +16,8 @@ interface Props {
     mode: Mode,
     data?: any,
     setData?: any,
-    submitHandler?: any
+    submitHandler?: any,
+    setMode?: any
 }
 
 const defaultValues = {
@@ -25,11 +25,13 @@ const defaultValues = {
     value: '',
     label: '',
     color: '#f0f0f0',
+    count: 1,
+    left: 1
 }
 
-const FortuneItemForm: FC<Props> = ({ mode, data, setData, submitHandler }: any) => {
+const FortuneItemForm: FC<Props> = ({ mode, data, setData, submitHandler, setMode }: any) => {
     const methods = useForm<IFortuneItem>({ defaultValues })
-    const { handleSubmit, control, watch, reset } = methods;
+    const { handleSubmit, control, watch, reset, setValue, getValues } = methods;
     watch()
 
     async function onSubmit(data: any) {
@@ -70,6 +72,24 @@ const FortuneItemForm: FC<Props> = ({ mode, data, setData, submitHandler }: any)
                                 />
                             )}
                         />
+                        <Controller
+                            control={control}
+                            name="count"
+                            render={({ field }: any) => (
+                                <TextInput
+                                    defaultValue={field.value}
+                                    onChange={(e: any) => {
+                                        const val: any = e.target.value;
+                                        field.onChange((+val))
+                                        setValue("left", +val)
+                                        console.log(getValues());
+                                    }}
+                                    maxLength={12}
+                                    placeholder="Количество"
+                                    type="number"
+                                />
+                            )}
+                        />
 
                         <Controller
                             control={control}
@@ -97,7 +117,8 @@ const FortuneItemForm: FC<Props> = ({ mode, data, setData, submitHandler }: any)
                     <div className={s.buttons}>
                         <Button className={s.resetButton} onClick={(e: any) => {
                             e.preventDefault();
-                            setData(defaultValues)
+                            setData(defaultValues);
+                            setMode("create")
                         }}>
                             Очистить
                         </Button>
