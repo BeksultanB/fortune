@@ -102,7 +102,7 @@ const initialData: IFortuneItem[] = [
     {
         icon: TShirtIcon,
         value: 't-shirts',
-        label: 'Футболки',
+        label: 'Футболка',
         color: '#76B5FF',
         count: 10,
         left: 10,

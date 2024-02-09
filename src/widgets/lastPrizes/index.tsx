@@ -6,7 +6,7 @@ import Subtitle from "shared/ui/Subtitle";
 import Text from "shared/ui/Text";
 import FortuneItem from "entities/fortuneItem";
 
-const LastPrizes = ({ prize, className = "", list, ...props }: any) => {
+const LastPrizes = ({ className = "", list, ...props }: any) => {
     const [prizes, setPrizes] = useState<any>([]);
 
     useEffect(() => {

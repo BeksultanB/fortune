@@ -9,23 +9,21 @@ import FortuneCongratulations from "entities/fortuneCongratulations";
 // import fortuneItems from "shared/constants/fortuneItems";
 import { useNavigate } from "react-router-dom";
 import { getList } from "shared/api/IndexedDB/FortuneItems/crud";
+import shuffleArray from "shared/utils/shuffleArray";
 
 function FortunePage() {
-    const [prize, setPrize] = useState<any>(null);
-    const [list, setList] = useState<any>([])
-    const [spinCounter, setSpinCounter] = useState<any>(0);
-    const [showCongratulations, setShowCongratulations] = useState<any>(false);
+    const navigate = useNavigate();
     const reelRef = useRef<any>(null);
     const containerRef = useRef<any>(null);
-    const navigate = useNavigate();
-    const localState = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
 
-    const startAutoplay = () => {
-        setSpinCounter(spinCounter + 1)
-        setShowCongratulations(false)
-    };
+    const [prize, setPrize] = useState<any>(null);
+    const [list, setList] = useState<any>([])
+    const [showCongratulations, setShowCongratulations] = useState<any>(false);
+    const [exceptions, setExceptions] = useState<any>([]);
 
-    const handleSpin = () => {
+    const wonPrizes = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
+
+    function handleWin() {
         setShowCongratulations(true);
         const wonPrizes = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
         const nodes = document.elementsFromPoint(reelRef.current.clientWidth / 2, containerRef.current.clientHeight / 2);
@@ -38,8 +36,19 @@ function FortunePage() {
         prize.left -= 1;
         wonPrizes[prize.value] = prize.count - prize.left;
         localStorage.setItem("wonPrizes", JSON.stringify(wonPrizes))
-        // console.log(list)
         setPrize(prize)
+    }
+
+    function handleSpin(callback: any) {
+        callback()
+        setList(shuffleArray(list))
+        if (prize?.left === 0 && !exceptions.includes(prize)) {
+            setExceptions((prev: any) => [...prev, prize])
+        }
+    }
+
+    function handleCongratulationsClose() {
+        setShowCongratulations(false)
     }
 
     function handleClick() {
@@ -52,10 +61,16 @@ function FortunePage() {
 
     async function fetchList() {
         const res = await getList();
-        setList(res)
+        setList(shuffleArray(res))
         return res
     }
-
+    useEffect(() => {
+        const wonItems = list.filter((item: any) => {
+            item.left = item.count - (wonPrizes[item.value] || 0);
+            return !item.left
+        })
+        setExceptions(wonItems)
+    }, [list]);
     useEffect(() => {
         fetchList()
     }, []);
@@ -63,13 +78,21 @@ function FortunePage() {
     return (
         <div className={s.container} ref={containerRef}>
             <div className={s.rouletteWrapper}>
-                <Fortune {...{ spinCounter, reelRef, prize, list }} refreshList={fetchList} spinHandler={handleSpin} />
+                <Fortune
+                    reelRef={reelRef}
+                    list={list}
+                    exceptions={exceptions}
+                    refreshList={fetchList}
+                    handleSpin={handleSpin}
+                    handleWin={handleWin}
+                    prize={prize}
+                />
             </div>
             <div className={s.content}>
                 <div className={s.secretDoor} tabIndex={-1} onContextMenu={handleCopy} onClick={handleClick} onCopy={handleCopy}></div>
                 {
-                    Object.keys(localState).length ?
-                        <LastPrizes prize={prize} list={list} /> :
+                    Object.keys(wonPrizes).length ?
+                        <LastPrizes list={list} /> :
                         <div className={s.contentWrapper}>
                             <Subtitle className={s.contentTitle}>Пока еще никто <br /> не участвовал</Subtitle>
                             <Text className={s.contentInfo}>Но вы можете стать первым</Text>
@@ -78,7 +101,7 @@ function FortunePage() {
                 <div className={s.triangleWrapper}><FortuneTriangle /></div>
                 <div className="toJustifyContent"></div>
             </div>
-            {showCongratulations && <FortuneCongratulations prize={prize} onOutsideClick={startAutoplay} />}
+            {showCongratulations && <FortuneCongratulations prize={prize} onOutsideClick={handleCongratulationsClose} />}
         </div>
     )
 }

@@ -126,7 +126,7 @@ const FortuneItemForm: FC<Props> = ({ mode, data, setData, submitHandler, setMod
                     </div>
                 </form>
                 <div className={s.previewContainer}>
-                    <FortuneItem showValue className={s.fortuneItem} data={methods.getValues()} />
+                    <FortuneItem showCount showValue className={s.fortuneItem} data={methods.getValues()} />
                 </div>
             </div>
         </FormProvider>
