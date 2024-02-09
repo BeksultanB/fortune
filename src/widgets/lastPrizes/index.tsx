@@ -10,14 +10,19 @@ const LastPrizes = ({ className = "", list, ...props }: any) => {
     const [prizes, setPrizes] = useState<any>([]);
 
     useEffect(() => {
+        console.log(Object.values(JSON.parse(localStorage.getItem("wonPrizes") || "{}")).reduce((prev: any, current: any) => (prev + current),))
         setPrizes(() => {
-            const wonPrizes = list.filter((item: any) => {
-                const localState = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
-                return localState[item.value] !== undefined;
-            })
+            const localState = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
+            const wonPrizes: any = [];
+            for (const value in localState) {
+                const item = list?.find((item: any) => {
+                    return item?.value === value
+                });
+                item && wonPrizes.push(item)
+            }
             return wonPrizes
         })
-    }, [list, Object.keys(JSON.parse(localStorage.getItem("wonPrizes") || "{}")).length])
+    }, [list, Object.values(JSON.parse(localStorage.getItem("wonPrizes") || "{}")).reduce((prev: any, current: any) => (prev + current),)])
 
     return (
         <div className={clsx(s.container, className)} {...props}>
@@ -31,7 +36,7 @@ const LastPrizes = ({ className = "", list, ...props }: any) => {
                         <FortuneItem
                             style={{ background: "#f6f6f6" }}
                             className={s.prize}
-                            key={prizeData.value + i}
+                            key={prizeData?.value + i}
                             iconProps={{ width: "80", height: "80" }}
                             data={prizeData}
                             showDiff

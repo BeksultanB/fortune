@@ -23,11 +23,15 @@ function Fortune({ reelRef, exceptions, handleSpin, handleWin, list, prize }: an
     }
 
     useEffect(() => {
-        setFilteredData(filter(list))
+        const arr = filter(list)
+        console.log(arr)
+        setFilteredData(arr)
     }, [list]);
     useEffect(() => {
         if (exceptions.length && !prize) {
-            setFilteredData(filter(list))
+            const arr = filter(list)
+            console.log(arr)
+            setFilteredData(arr)
         }
     }, [exceptions]);
 

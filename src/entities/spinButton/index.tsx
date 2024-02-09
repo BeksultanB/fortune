@@ -10,7 +10,7 @@ const SpinButton = (props: any) => {
             className={s.button}
             style={
                 props.disabled ?
-                    { background: "#051064", color: "rgb(177 177 177)" }
+                    { background: "rgb(155, 155, 155)", color: "#0b6879" }
                     : null
             }
             {...props}

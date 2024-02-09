@@ -9,7 +9,7 @@ const Reel = ({ reelsData, className = "", reelRef, ...props }: any) => {
             {reelsData?.map((data: any, index: any) => {
                 return (
                     <div key={data.value + index} className={clsx("fortuneSlot", s.fortuneSlot)} data-value={data.value}>
-                        <FortuneItem showLeft dataindex={index} data={data} />
+                        {data.value === "nothing" ? <FortuneItem dataindex={index} data={data} /> : <FortuneItem showLeft dataindex={index} data={data} />}
                     </div>
                 )
             })}

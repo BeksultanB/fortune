@@ -24,7 +24,6 @@ function FortunePage() {
     const wonPrizes = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
 
     function handleWin() {
-        setShowCongratulations(true);
         const wonPrizes = JSON.parse(localStorage.getItem("wonPrizes") || "{}");
         const nodes = document.elementsFromPoint(reelRef.current.clientWidth / 2, containerRef.current.clientHeight / 2);
         const currentItem = nodes.find(node => node.className.includes("fortuneSlot"));
@@ -33,10 +32,14 @@ function FortunePage() {
         const prize = list.find((item: any) => {
             return item.value === value
         })
-        prize.left -= 1;
-        wonPrizes[prize.value] = prize.count - prize.left;
-        localStorage.setItem("wonPrizes", JSON.stringify(wonPrizes))
-        setPrize(prize)
+        if (prize.value !== "nothing") {
+            prize.left -= 1;
+            delete wonPrizes[prize.value]
+            wonPrizes[prize.value] = prize.count - prize.left;
+            setShowCongratulations(true);
+            localStorage.setItem("wonPrizes", JSON.stringify(wonPrizes))
+            setPrize(prize)
+        }
     }
 
     function handleSpin() {

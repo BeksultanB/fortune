@@ -1,8 +1,9 @@
 .button {
-    background: #0a1fb5;
+    background: #ffffff;
+    color: #0fb6d3;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 80px 5px;
     &:hover {
-        background: #051064;
-        color: rgb(177, 177, 177);
+        background: rgb(155, 155, 155);
+        color: #0b6879;
     }
 }
