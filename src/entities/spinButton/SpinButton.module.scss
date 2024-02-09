@@ -2,8 +2,13 @@
     background: #ffffff;
     color: #0fb6d3;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 80px 5px;
-    &:hover {
+    &:active {
         background: rgb(155, 155, 155);
         color: #0b6879;
+    }
+    &:hover {
+        background: #ffffff;
+        color: #0fb6d3;
+        box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 80px 5px;
     }
 }
