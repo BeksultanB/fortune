@@ -40,7 +40,7 @@ const FortuneItemForm: FC<Props> = ({ mode, data, setData, submitHandler, setMod
     }
 
     useEffect(() => {
-        (mode === "update") && reset(data)
+        reset(data)
     }, [data, mode]);
 
     return (
@@ -117,7 +117,7 @@ const FortuneItemForm: FC<Props> = ({ mode, data, setData, submitHandler, setMod
                     <div className={s.buttons}>
                         <Button className={s.resetButton} onClick={(e: any) => {
                             e.preventDefault();
-                            setData(defaultValues);
+                            setData({ ...defaultValues });
                             setMode("create")
                         }}>
                             Очистить

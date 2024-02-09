@@ -4,6 +4,7 @@ import Reel from 'entities/reel';
 
 import s from './fortune.module.scss';
 import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 function Fortune({ reelRef, exceptions, handleSpin, handleWin, list, prize }: any) {
     const [filteredData, setFilteredData] = useState([]);
@@ -33,11 +34,11 @@ function Fortune({ reelRef, exceptions, handleSpin, handleWin, list, prize }: an
     return (
         <>
             <Reel {...{ reelRef, reelsData: multipleReelsData }} />
-            <div className={s.shadowBox} >
+            <div className={clsx("shadow-box", s.shadowBox)} >
                 <div className={s.buttonWrapper}>
                     <Spin {
                         // @ts-ignore
-                        ...{ reelRef, handleSpin, handleWin, disabled: (filteredData.length === 1 && !filteredData[0]?.left) }
+                        ...{ prize, reelRef, handleSpin, handleWin, disabled: (filteredData.length === 1 && !filteredData[0]?.left) }
                     } />
                 </div>
             </div>

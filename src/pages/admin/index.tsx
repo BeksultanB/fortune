@@ -3,11 +3,21 @@ import AdminView from './AdminView'
 import FortuneItemForm, { Mode } from 'widgets/fortuneItemForm';
 import { deleteSingle, getList, updateSingle } from 'shared/api/IndexedDB/FortuneItems/crud';
 import FortuneItemsList from 'widgets/FortuneItemsList';
+import { DefaultFortuneItemIcon } from 'shared/api/IndexedDB/FortuneItems/initialData';
+
+const defaultValues = {
+    icon: DefaultFortuneItemIcon,
+    value: '',
+    label: '',
+    color: '#f0f0f0',
+    count: 1,
+    left: 1
+}
 
 function Admin() {
     const [formMode, setFormMode] = useState<Mode>("create");
     const [fortuneItems, setFortuneItems] = useState<any>([]);
-    const [data, setData] = useState<any>(null);
+    const [data, setData] = useState<any>(defaultValues);
 
     async function fetchList() {
         const list = await getList()

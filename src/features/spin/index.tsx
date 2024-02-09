@@ -10,29 +10,43 @@ const Spin = ({ reelRef, handleSpin, handleWin, disabled }: any) => {
     const spinHandler = () => {
         if (!spinning) {
             setSpinning(() => true)
-            handleSpin(spin)
 
-            function spin() {
-                const animation = reel?.animate([
-                    { top, filter: "blur(0)", transfrom: "translate3d(0, 0, 0)" },
-                    { filter: "blur(2px)", offset: 0.5 },
-                    {
-                        top: `calc(${-(65 * 200)}px + (${top}))`,
-                        filter: "blur(0)",
-                    },
-                ],
-                    {
-                        duration: 8000,
-                        easing: "cubic-bezier(0.7, 0.3, 0.2, 0.9)",
-                        fill: 'forwards',
-                    })
-                animation.onfinish = () => {
-                    setTimeout(() => {
-                        setSpinning(() => false)
-                        handleWin()
-                        reel.style.top = top;
-                    }, 700)
-                }
+            const shadowBox = document.querySelector(".shadow-box");
+            // @ts-ignore
+            const shadowAnimation = shadowBox.animate([
+                { boxShadow: "inset 0px 0px 200px 60px rgb(0, 0, 0)", transfrom: "translate3d(0, 0, 0)" },
+                { boxShadow: "inset 0px 0px 200px 600px rgb(0, 0, 0)" },
+                { boxShadow: "inset 0px 0px 200px 60px rgb(0, 0, 0)" },
+            ],
+                {
+                    duration: 1800,
+                    easing: "ease-in-out",
+                    // @ts-ignore
+                });
+            setTimeout(() => {
+                reel.style.top = top;
+                handleSpin()
+            }, 700)
+
+            const spinAnimation = reel?.animate([
+                { top, filter: "blur(0)", transfrom: "translate3d(0, 0, 0)" },
+                { filter: "blur(2px)", offset: 0.5 },
+                {
+                    top: `calc(${-(65 * 200)}px + (${top}))`,
+                    filter: "blur(0)",
+                },
+            ],
+                {
+                    duration: 8000,
+                    easing: "cubic-bezier(0.7, 0.3, 0.2, 0.9)",
+                    fill: 'forwards',
+                    delay: 1000
+                })
+            spinAnimation.onfinish = () => {
+                setTimeout(() => {
+                    setSpinning(() => false)
+                    handleWin()
+                }, 700)
             }
         }
     }

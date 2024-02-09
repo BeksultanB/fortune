@@ -39,8 +39,7 @@ function FortunePage() {
         setPrize(prize)
     }
 
-    function handleSpin(callback: any) {
-        callback()
+    function handleSpin() {
         setList(shuffleArray(list))
         if (prize?.left === 0 && !exceptions.includes(prize)) {
             setExceptions((prev: any) => [...prev, prize])

@@ -18,10 +18,10 @@
     flex-direction: column;
     justify-content: flex-end;
     padding: 0 28px 30px;
+    transition: box-shadow 0.7s ease-in-out;
 }
 .buttonWrapper {
     display: flex;
     flex-direction: column;
     height: 80px;
-    transform: translate3d(0, 0, 0);
 }
