@@ -42,15 +42,14 @@ function FortunePage() {
         setPrize(prize)
     }
 
-    function handleHiddenAction(e: any) {
-        if (e.code === "KeyA") {
-            navigate("/admin")
-        }
-        if (e.code === "KeyR") {
-            localStorage.setItem("wonPrizes", JSON.stringify({}));
-            fetchList()
-        }
+    function handleClick() {
+        navigate("/admin")
     }
+    function handleCopy() {
+        localStorage.setItem("wonPrizes", JSON.stringify({}));
+        fetchList()
+    }
+
     async function fetchList() {
         const res = await getList();
         setList(res)
@@ -67,7 +66,7 @@ function FortunePage() {
                 <Fortune {...{ spinCounter, reelRef, prize, list }} refreshList={fetchList} spinHandler={handleSpin} />
             </div>
             <div className={s.content}>
-                <div className={s.secretDoor} tabIndex={-1} onKeyDown={handleHiddenAction}></div>
+                <div className={s.secretDoor} tabIndex={-1} onContextMenu={handleCopy} onClick={handleClick} onCopy={handleCopy}></div>
                 {
                     Object.keys(localState).length ?
                         <LastPrizes prize={prize} list={list} /> :
